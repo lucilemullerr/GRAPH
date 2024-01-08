@@ -1,0 +1,32 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Mon Dec 18 09:32:34 2023
+
+@author: Elisa
+"""
+import csv
+arcs = 'data/data_arcs_poids.csv'
+
+# Ouvrir le fichier puis code qui répond à la question Q2.2
+with open(arcs, 'r', encoding='utf-8') as f:
+    # interprête le fichier comme un csv avec délimiteur
+    csvReader = csv.reader(f, delimiter=';')
+# le fichier f est maintenant fermé
+# on aurait juste pu ecrire r=csv.reader(f)
+    fruit_2 = []
+    for row in csvReader:  # parcours toutes les lignes du csv
+        fruit_2.append(row)  # les ajoute dans liste
+#fruit est notre liste d'elements avec les liens favorise,defavorise ou repousse 
+
+def creer_dico_favorise(liste):
+    dico={}
+    for i in range(len(liste)):
+        clef=liste[i][0]
+        if liste[i][1] == "favorise":
+            if clef not in dico.keys():
+                dico[clef]=[(liste[i][2],liste[i][3])]
+            else:
+                dico[clef].append((liste[i][2],liste[i][3]))
+    return dico
+
+dico_fruit_2= creer_dico_favorise(fruit_2)
